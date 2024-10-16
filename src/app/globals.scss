@@ -11,28 +11,17 @@
   list-style: none;
   background: none;
 
-  --black: #000305;
+  --black: #010009;
   --white: #ffffff;
 
-  --gradient-black: linear-gradient(
-    5deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(32, 32, 32, 1) 90%,
-    rgba(44, 44, 44, 1) 95%,
-    rgba(55, 55, 55, 1) 100%
-  );
-  --linear-gradient: linear-gradient(
-    5deg,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.7) 50%,
-    rgba(0, 0, 0, 0.5) 70%,
-    rgba(0, 0, 0, 0.5) 80%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+  --dark-red: #b80000;
+  --light-red: #fd7575;
 
-  --shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  --hover-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-  --border-radius: 6px;
+  --primary: #07041b;
+  --secondary: #0079fd;
+  --alternative: #312ec9;
+
+  --border-radius: 20px;
   --transition: all 0.3s ease-in-out;
 }
 

@@ -45,8 +45,8 @@ model Workspace {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  users   WorkspaceUser[]
-  expense Expense[]
+  users    WorkspaceUser[]
+  accounts Account[]
 }
 
 model WorkspaceUser {
@@ -69,15 +69,15 @@ model Expense {
   date        DateTime    @default(now())
   type        ExpenseType
 
-  workspaceId String
-  userId      String
-  labelId     String?
-  categoryId  String?
+  userId     String
+  labelId    String?
+  categoryId String?
+  accountId  String?
 
-  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  label     Label?    @relation(fields: [labelId], references: [id], onDelete: Cascade)
-  category  Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label    Label?    @relation(fields: [labelId], references: [id], onDelete: Cascade)
+  category Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  account  Account?  @relation(fields: [accountId], references: [id])
 }
 
 model Label {
@@ -94,4 +94,21 @@ model Category {
   name String @unique
 
   expense Expense[]
+}
+
+model Account {
+  id String @id @default(cuid())
+
+  name        String
+  description String?
+
+  amount Float @default(0)
+
+  expense Expense[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 }

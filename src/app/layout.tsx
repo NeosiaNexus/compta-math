@@ -19,7 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body>
+      <body
+        style={{
+          backgroundColor: 'var(--primary)',
+        }}
+      >
         {children}
         <Toaster richColors theme={'dark'} />
         <NextTopLoader color={'#fff'} showSpinner={false} zIndex={10000000} />
