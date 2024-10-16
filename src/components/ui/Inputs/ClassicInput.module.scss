@@ -1,0 +1,66 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .inputContainer {
+    .head {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      .icon {
+        color: var(--secondary);
+        font-size: 25px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .name {
+        color: var(--black);
+        font-size: 15px;
+        font-weight: 400;
+      }
+    }
+    .inputSpace {
+      position: relative;
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid var(--light-gray);
+        margin-top: 10px;
+        transition: var(--transition);
+        &:focus {
+          border: 1px solid var(--primary);
+        }
+      }
+
+      .passwordVisibility {
+        font-size: 20px;
+
+        position: absolute;
+
+        right: 10px;
+        top: 60%;
+
+        transform: translate(-50%, -50%);
+
+        cursor: pointer;
+
+        color: var(--light-gray);
+
+        transition: var(--transition);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+          color: var(--black);
+        }
+      }
+    }
+  }
+}

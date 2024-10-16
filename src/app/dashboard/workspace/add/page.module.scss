@@ -19,11 +19,13 @@
 
     .head {
       text-align: center;
-      text-transform: uppercase;
-      h5 {
+      h3 {
+        text-transform: uppercase;
         color: var(--secondary);
-        text-transform: full-size-kana;
-        font-weight: 300;
+      }
+      p {
+        color: var(--light-gray);
+        font-size: 0.8rem;
       }
     }
 
@@ -32,8 +34,8 @@
       flex-direction: column;
       gap: 20px;
 
-      .labelContainer {
-        .label {
+      .inputContainer {
+        .head {
           display: flex;
           align-items: center;
           gap: 5px;
@@ -67,10 +69,15 @@
     }
     button {
       background-color: var(--secondary);
+
       color: var(--white);
+
       border-radius: 10px;
+
       padding: 10px;
+
       cursor: pointer;
+
       text-transform: uppercase;
       font-weight: bold;
       font-size: 16px;

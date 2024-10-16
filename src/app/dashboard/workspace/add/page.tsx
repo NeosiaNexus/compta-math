@@ -2,15 +2,15 @@
 
 import React from 'react';
 
-import { workspaceAddAction } from '@/action/workspace-add-action';
+import { workspaceAddAction } from '@/action/workspace/workspace-add-action';
 import { toast } from 'sonner';
 
 import { MdDriveFileRenameOutline } from 'react-icons/md';
 
-import styles from './page.module.scss';
-import { Simulate } from 'react-dom/test-utils';
-import load = Simulate.load;
 import { LoadSpinner } from '@/components/ui/LoaderSpinner/LoadSpinner';
+import { ClassicInput } from '@/components/ui/Inputs/ClassicInput';
+
+import styles from './page.module.scss';
 
 export default function DashboardWorkspaceAdd() {
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -24,14 +24,14 @@ export default function DashboardWorkspaceAdd() {
 
     workspaceAddAction(formData)
       .catch((error) => {
-        if (error.message) {
-          toast.error(error.message);
-          return;
-        }
         if (process.env.NODE_ENV === 'development') {
           console.error(
             'Une erreur est survenue lors de la création du workspace',
           );
+        }
+        if (error.message) {
+          toast.error(error.message);
+          return;
         }
         toast.error('Une erreur est survenue lors de la création du workspace');
       })
@@ -51,24 +51,16 @@ export default function DashboardWorkspaceAdd() {
       <form onSubmit={handleSubmit} className={styles.main}>
         <div className={styles.head}>
           <h3>Créer un Workspace</h3>
-          <h5>Restez à jour sur vos comptes et dépenses</h5>
+          <p>Restez à jour sur vos comptes et dépenses</p>
         </div>
-        <div className={styles.content}>
-          <label className={styles.labelContainer}>
-            <div className={styles.label}>
-              <span className={styles.icon}>
-                <MdDriveFileRenameOutline />
-              </span>
-              <span className={styles.name}>Nom du workspace</span>
-            </div>
-            <input
-              type="text"
-              name="name"
-              placeholder={'Ex: Vacances à Milan'}
-              disabled={loading}
-            />
-          </label>
-        </div>
+        <ClassicInput
+          displayName={'Nom du workspace 2'}
+          type={'text'}
+          Icon={MdDriveFileRenameOutline}
+          placeholder={'Ex: Vacances à Milan'}
+          name={'name'}
+          loading={loading}
+        />
         <button type="submit" disabled={loading}>
           {loading ? <LoadSpinner /> : 'Créer'}
         </button>

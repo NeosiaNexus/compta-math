@@ -24,6 +24,8 @@ model User {
   email         String    @unique
   emailVerified DateTime? @map("email_verified")
 
+  pseudo String @unique
+
   avatar String?
 
   passwordHash String
@@ -34,7 +36,7 @@ model User {
   expense          Expense[]
   workSpaceAccount WorkspaceUser[]
 
-  @@index([email])
+  @@index([email, pseudo])
 }
 
 model Workspace {
