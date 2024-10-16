@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RoleType {
+  FOUNDER
+  USER
+  VISITOR
+}
+
+enum ExpenseType {
+  EXPENSE
+  REVENUE
+}
+
+model User {
+  id String @id @default(cuid())
+
+  email         String    @unique
+  emailVerified DateTime? @map("email_verified")
+
+  avatar String?
+
+  passwordHash String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  expense          Expense[]
+  workSpaceAccount WorkspaceUser[]
+
+  @@index([email])
+}
+
+model Workspace {
+  id String @id @default(cuid())
+
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users   WorkspaceUser[]
+  expense Expense[]
+}
+
+model WorkspaceUser {
+  id String @id @default(cuid())
+
+  role RoleType @default(FOUNDER)
+
+  userId      String
+  workspaceId String
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
+
+model Expense {
+  id String @id @default(cuid())
+
+  description String?
+  amount      Float       @default(0)
+  date        DateTime    @default(now())
+  type        ExpenseType
+
+  workspaceId String
+  userId      String
+  labelId     String?
+  categoryId  String?
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label     Label?    @relation(fields: [labelId], references: [id], onDelete: Cascade)
+  category  Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+}
+
+model Label {
+  id String @id @default(cuid())
+
+  name String @unique
+
+  expense Expense[]
+}
+
+model Category {
+  id String @id @default(cuid())
+
+  name String @unique
+
+  expense Expense[]
+}
